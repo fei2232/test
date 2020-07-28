@@ -1,0 +1,105 @@
+{% extends "common/layout_main.html" %}
+{% block content %}
+<div class="row  border-bottom">
+    <div class="col-lg-12">
+        <div class="tab_title">
+            <ul class="nav nav-pills">
+                <li class="current">
+                    <a href="{{ buildUrl('/equip/index') }}">设备列表</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row m-t  wrap_equip_add">
+	<div class="col-lg-12">
+		<h2 class="text-left">设备信息设置</h2>
+		<div class="form-horizontal m-t m-b">
+        <div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">设备编号:</label>
+				<div class="col-lg-3">
+					<input type="text" name="equip_id" class="form-control" placeholder="请输入规范的设备编号~~" value="{{ info.equip_id }}">
+				</div>
+			</div>
+            <div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">所属钻井平台:</label>
+				<div class="col-lg-3">
+{#					<input type="text" name="equip_platform" class="form-control" placeholder="请选择钻井平台~~" value="{{ info.equip_platform }}">#}
+                    <select name="equip_platform" class="form-control inline">
+                        <option value="{{ info.equip_platform }}">{{ platform_info[info.equip_platform] }}</option>
+                        {% for p_info in platform_info %}
+                            <option value="{{ p_info }}"{% if p_info == platform_info['equip_platform'] %} selected {% endif %}>{{ platform_info[p_info] }}</option>
+                        {% endfor %}
+                    </select>
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">监测油品:</label>
+				<div class="col-lg-3">
+{#					<input type="text" name="equip_oil" class="form-control" placeholder="请选择监测油品~~" value="{{ info.equip_oil }}">#}
+                    <select name="equip_oil" class="form-control inline">
+                        <option value="{{ info.equip_oil }}">{{ oil_info[info.equip_oil] }}</option>
+                        {% for o_info in oil_info %}
+                            <option value="{{ o_info }}"{% if o_info == oil_info['equip_oil'] %} selected {% endif %}>{{ oil_info[o_info] }}</option>
+                        {% endfor %}
+                    </select>
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">罐体长度:</label>
+				<div class="col-lg-8">
+					<input type="text" name="equip_length" class="form-control" placeholder="请输入罐体长度~~" value="{{ info.equip_length }}">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+            <div class="form-group">
+				<label class="col-lg-2 control-label">罐体宽度:</label>
+				<div class="col-lg-8">
+					<input type="text" name="equip_width" class="form-control" placeholder="请输入罐体宽度~~" value="{{ info.equip_width }}">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+            <div class="form-group">
+				<label class="col-lg-2 control-label">罐体高度:</label>
+				<div class="col-lg-8">
+					<input type="text" name="equip_height" class="form-control" placeholder="请输入罐体高度~~" value="{{ info.equip_height }}">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+            <div class="form-group">
+				<label class="col-lg-2 control-label">设备状态:</label>
+				<div class="col-lg-3">
+{#					<input type="text" name="equip_status" class="form-control" placeholder="请选择设备状态~~" value="{{ info.equip_status }}">#}
+                    <select name="equip_status" class="form-control inline">
+                        <option value="{{ info.equip_status }}">{{ status_mapping[info.equip_status] }}</option>
+                        {% for tmp_key in status_mapping %}
+                            <option value="{{ tmp_key }}"{% if tmp_key == search_con['status'] %} selected {% endif %}>{{ status_mapping[tmp_key] }}</option>
+                        {% endfor %}
+                    </select>
+				</div>
+			</div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+				<label class="col-lg-2 control-label">备注信息:</label>
+				<div class="col-lg-8">
+					<input type="text" name="equip_remark" class="form-control" placeholder="请输入备注信息~~" value="{{ info.equip_remark }}">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<div class="col-lg-4 col-lg-offset-2">
+                    <input type="hidden" name="id" value="{{ info.equip_id }}">
+					<button class="btn btn-w-m btn-outline btn-primary save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{{ buildStaticUrl('/js/equip/add.js') }}"></script>
+{% endblock %}
